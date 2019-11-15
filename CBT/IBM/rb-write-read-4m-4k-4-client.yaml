@@ -1,0 +1,32 @@
+cluster:
+  user: "ks591a"
+  head: "node1"
+  clients: ["client1","client2","client3","client4"]
+  osds: ["node1", "node2", "node3"]
+  mons:
+    mtn16r11o001:
+      a: "ceph-mon-discovery.ceph.svc.cluster.local"
+  osds_per_node: 12
+  iterations: 1
+  rebuild_every_test: False
+  use_existing: True
+  clusterid: "ceph"
+  tmp_dir: "/tmp/cbt"
+  pool_profiles:
+    replicated:
+      pg_size: 8
+      pgp_size: 8
+      replication: 3
+benchmarks:
+  radosbench:
+    op_size: [ 4194304 , 4096 ]
+    write_only: False
+    time: 300
+    concurrent_ops: [ 128 ]
+    concurrent_procs: 1
+    use_existing: True
+    pool_profile: "replicated"
+    pool_per_proc: False
+    target_pool: "cm434853-2"
+    readmode: "seq"
+    osd_ra: [131072]
